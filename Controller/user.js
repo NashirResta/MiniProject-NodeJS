@@ -90,6 +90,21 @@ module.exports = {
     res.json(data);
   },
 
+  pagination: async (req, res) => {
+    try {
+      const data = await User.findAll({
+        limit: JSON.parse(req.query.size),
+        offset: JSON.parse(req.query.page),
+      });
+      if (data == 0) {
+        res.status(404).json({ message: "reach limit" });
+      }
+      res.json(data);
+    } catch (error) {
+      res.status(422).json({ message: error.message });
+    }
+  },
+
   getUserId: async (req, res) => {
     const data = await User.findOne({
       where: { id: req.params.id },
@@ -136,5 +151,9 @@ module.exports = {
       },
     });
     res.json({ Messsage: `Succesfull to delete!` });
+  },
+
+  logout: async (req, res) => {
+    res.status(200).json({ message: `Anda Sudah Log Out` });
   },
 };

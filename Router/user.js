@@ -116,6 +116,8 @@ router.get("/getUserId/:id", UserController.getUserId);
 
 router.get("/getUsername/:username", UserController.getUserName);
 
+router.get("/pagination", UserController.pagination);
+
 /**
  * @swagger
  * /updateUser/{id}:
@@ -187,5 +189,22 @@ router.put("/updateUser/:id", UserController.updateUser);
  */
 
 router.delete("/deleteUser/:id", UserController.deleteUser);
+
+/**
+ * @swagger
+ * /logout:
+ *  get:
+ *    summary: Log Out
+ *    tags: [USER]
+ *    responses:
+ *      200:
+ *        description: The book was created
+ *      404:
+ *        description: The book was not found
+ *      500:
+ *        description: Some error happened
+ */
+
+router.get("/logout", UserController.logout);
 
 module.exports = router;
