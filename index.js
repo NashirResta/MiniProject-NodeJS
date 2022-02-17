@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const UserRouter = require("./Router/user");
 const NotesUser = require("./Router/notes");
@@ -31,6 +33,8 @@ app.use(express.json());
 app.use(UserRouter);
 app.use(NotesUser);
 
-app.listen(3001, () => console.log(`Listening at PORT ` + 3001));
+app.listen(process.env.port, () =>
+  console.log(`Listening at PORT ` + process.env.port)
+);
 
 module.exports = app;
