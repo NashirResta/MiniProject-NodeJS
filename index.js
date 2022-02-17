@@ -8,6 +8,8 @@ const app = express();
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
+const port = process.env.PORT || 3000;
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -33,8 +35,6 @@ app.use(express.json());
 app.use(UserRouter);
 app.use(NotesUser);
 
-app.listen(process.env.port, () =>
-  console.log(`Listening at PORT ` + process.env.port)
-);
+app.listen(port, () => console.log(`Listening at PORT ` + port));
 
 module.exports = app;
