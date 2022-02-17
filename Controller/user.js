@@ -150,7 +150,7 @@ module.exports = {
         id: id,
       },
     });
-    res.json({ Messsage: `Succesfull to delete!` });
+    res.json({ Messsage: `Succesfull to delete User id ${id}!` });
   },
 
   logout: async (req, res) => {
