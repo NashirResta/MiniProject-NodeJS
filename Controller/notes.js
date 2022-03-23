@@ -7,10 +7,7 @@ module.exports = {
     try {
       const data = await Notes.create({
         userId: req.body.userId,
-        name: req.body.name,
         activity: req.body.activity,
-        day: req.body.day,
-        date: req.body.date,
       });
       res.json({ data });
     } catch (error) {
@@ -29,10 +26,7 @@ module.exports = {
     const data = await Notes.update(
       {
         userId: req.body.userId,
-        name: req.body.name,
         activity: req.body.activity,
-        day: req.body.day,
-        date: req.body.date,
       },
       {
         where: {

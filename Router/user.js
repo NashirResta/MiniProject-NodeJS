@@ -114,7 +114,7 @@ router.get("/getUserId/:id", UserController.getUserId);
  *        description: Some error happened
  */
 
-router.get("/getUsername/:username", UserController.getUserName);
+router.get("/getUserEmail/:email", UserController.getUserEmail);
 
 router.get("/pagination", UserController.pagination);
 

@@ -17,26 +17,26 @@ module.exports = {
     const hashPassword = await bcrypt.hash(password, saltRound);
     try {
       const data = await User.create({
-        username: req.body.username,
-        password: hashPassword,
-        isActive: req.body.isActive,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         email: req.body.email,
+        password: hashPassword,
+        confirmpassword: req.body.confirmpassword,
       });
       res.json(data);
     } catch (error) {
-      console.log(Error.message);
-      res.status(422).json({ message: Error.sqlMessage });
+      res.status(422).json({ message: error.errors[0].message });
     }
   },
 
   login: async (req, res) => {
     try {
-      const username = req.body.username;
+      const email = req.body.email;
       const password = req.body.password;
 
       const data = await User.findOne({
         where: {
-          username: username,
+          email: email,
         },
       });
       if (!data) {
@@ -50,10 +50,10 @@ module.exports = {
 
       const payload = {
         ID: data.dataValues.id,
-        username: username,
+        email: email,
       };
       const token = jwt.sign(payload, "hey");
-      res.json({ username: data.username, token: token });
+      res.json({ message: "Login Berhasil", email: data.email, token: token });
     } catch (err) {
       res.json({ msg: err.message });
     }
@@ -61,14 +61,14 @@ module.exports = {
 
   register: async (req, res) => {
     try {
-      const username = req.body.username;
+      const email = req.body.email;
       const data = await User.findOne({
         where: {
-          username: username,
+          email: email,
         },
       });
       console.log(req.payload);
-      res.json({ userId: data.id, username: data.username });
+      res.json({ userId: data.id, email: data.email });
     } catch (Error) {
       console.log(Error.message);
       res.status(422).json({ message: Error.sqlMessage });
@@ -108,14 +108,17 @@ module.exports = {
   getUserId: async (req, res) => {
     const data = await User.findOne({
       where: { id: req.params.id },
+      include: [{ model: Notes }],
     });
     res.json(data);
   },
 
-  getUserName: async (req, res) => {
+  getUserEmail: async (req, res) => {
     try {
       const data = await User.findAll({
-        where: { username: req.params.username },
+        where: {
+          email: req.params.email,
+        },
       });
       if (data.length > 0) {
         res.status(201).json({ message: "succes get data", data: data });
@@ -129,10 +132,11 @@ module.exports = {
     const id = req.params.id;
     const data = await User.update(
       {
-        username: req.body.username,
-        password: req.body.password,
-        isActive: req.body.isActive,
+        firstname: req.body.username,
+        lastname: req.body.username,
         email: req.body.email,
+        password: req.body.password,
+        confirmpassword: req.body.confirmpassword,
       },
       {
         where: {

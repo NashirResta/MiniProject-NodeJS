@@ -4,11 +4,11 @@ const express = require("express");
 const UserRouter = require("./Router/user");
 const NotesUser = require("./Router/notes");
 const app = express();
-
+const cors = require("cors");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const options = {
   definition: {
@@ -30,6 +30,8 @@ const options = {
 const specs = swaggerJsDoc(options);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+
+app.use(cors());
 
 app.use(express.json());
 app.use(UserRouter);

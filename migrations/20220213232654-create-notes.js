@@ -11,16 +11,7 @@ module.exports = {
       userId: {
         type: Sequelize.STRING,
       },
-      name: {
-        type: Sequelize.STRING,
-      },
       activity: {
-        type: Sequelize.STRING,
-      },
-      day: {
-        type: Sequelize.STRING,
-      },
-      date: {
         type: Sequelize.STRING,
       },
       createdAt: {

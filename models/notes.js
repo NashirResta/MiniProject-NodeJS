@@ -14,10 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   notes.init(
     {
       userId: DataTypes.STRING,
-      name: DataTypes.STRING,
+
       activity: DataTypes.STRING,
-      day: DataTypes.STRING,
-      date: DataTypes.STRING,
     },
     {
       sequelize,
