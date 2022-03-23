@@ -25,7 +25,7 @@ module.exports = {
       });
       res.json(data);
     } catch (error) {
-      res.status(422).json({ message: error.errors[0].message });
+      res.status(422).json({ message: error.message });
     }
   },
 
